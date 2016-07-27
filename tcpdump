@@ -1,0 +1,2 @@
+import os
+os.system("tcpdump -vvv -i eth0 -w otomatikTarama.pcap")
