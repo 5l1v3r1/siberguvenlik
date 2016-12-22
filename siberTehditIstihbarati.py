@@ -227,10 +227,10 @@ else:
     dosya.close()
 try:
     subprocess.call("curl https://reputation.alienvault.com/reputation.snort.gz",shell=True)
-    sonuc=subprocess.check_call("ls   /Users/anilbaranyelken/Downloads/ | grep 'reputation.snort.gz'",shell=True)
+    sonuc=subprocess.check_call("ls   /Users/username/Downloads/ | grep 'reputation.snort.gz'",shell=True)
     if int(sonuc)==0:
-        subprocess.call("tar -zxvf /Users/anilbaranyelken/Downloads/reputation.snort.gz", shell=True)
-        komut="cat /Users/anilbaranyelken/Downloads/reputation.snort | grep "+str(baglanti)
+        subprocess.call("tar -zxvf /Users/username/Downloads/reputation.snort.gz", shell=True)
+        komut="cat /Users/username/Downloads/reputation.snort | grep "+str(baglanti)
         sonuc=subprocess.check_output(komut,shell=True)
         print sonuc
         if sonuc:
