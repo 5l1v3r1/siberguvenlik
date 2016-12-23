@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+__author__ = "Anıl Baran Yelken"
 import requests
 import subprocess
 import socket
@@ -37,26 +38,29 @@ print "Sonuc:",response.content[ServerNameBasla:ServerNameSon]
 print "Sonuc:",response.content[ServerNameBasla:ServerNameSon]
 sorgu="https://www.badips.com/get/info/"+str(baglanti)
 response=requests.get(sorgu,verify=False)
-print response.json()['Listed']
-if response.json()['Listed'] == False:
-    badips=response.json()['suc']+"\n"
-    dosya=open(dosyaAdi,"a")
-    dosya.write(badips)
-    dosya.close()
-else:
-    icerik=response.json()
-    print icerik
-    ListStatusBadIPs="Bad IP Durumu: "+icerik['suc']+"\n"
-    CountryBadIPs = "Ulke Bilgisi: "+icerik['CountryCode'] + "\n"
-    #InetnumBadIPs = "IP araligi: "+icerik['Whois']['inetnum'] + "\n"
-    #DescrBadIPs = "Bilgi:"+icerik['Whois']['descr'][0] + "\n" + icerik['Whois']['descr'][1] +"\n"
-    ReportCountIPs = "Raporlanma Sayisi: "+str(icerik['ReporterCount']['sum']) +"\n"
-    CategoryBadIPs = "Kategori: " +icerik['Categories'][0]+"\n"
-    #badips=ListStatusBadIPs + CountryBadIPs + InetnumBadIPs + DescrBadIPs + ReportCountIPs + CategoryBadIPs
-    badips = ListStatusBadIPs + CountryBadIPs  + ReportCountIPs + CategoryBadIPs
-    dosya=open(dosyaAdi,"a")
-    dosya.write(badips)
-    dosya.close()
+#print response.json()['Listed']
+try:
+    if response.json()['Listed'] == False:
+        badips=response.json()['suc']+"\n"
+        dosya=open(dosyaAdi,"a")
+        dosya.write(badips)
+        dosya.close()
+    else:
+        icerik=response.json()
+        print icerik
+        ListStatusBadIPs="Bad IP Durumu: "+icerik['suc']+"\n"
+        CountryBadIPs = "Ulke Bilgisi: "+icerik['CountryCode'] + "\n"
+        #InetnumBadIPs = "IP araligi: "+icerik['Whois']['inetnum'] + "\n"
+        #DescrBadIPs = "Bilgi:"+icerik['Whois']['descr'][0] + "\n" + icerik['Whois']['descr'][1] +"\n"
+        ReportCountIPs = "Raporlanma Sayisi: "+str(icerik['ReporterCount']['sum']) +"\n"
+        CategoryBadIPs = "Kategori: " +icerik['Categories'][0]+"\n"
+        #badips=ListStatusBadIPs + CountryBadIPs + InetnumBadIPs + DescrBadIPs + ReportCountIPs + CategoryBadIPs
+        badips = ListStatusBadIPs + CountryBadIPs  + ReportCountIPs + CategoryBadIPs
+        dosya=open(dosyaAdi,"a")
+        dosya.write(badips)
+        dosya.close()
+except:
+    print "Bilgi elde edilemiyor..."
 BlockListSSH=requests.get('https://lists.blocklist.de/lists/ssh.txt',verify=False)
 print "BlockListSSH"
 print BlockListSSH.content
@@ -227,10 +231,10 @@ else:
     dosya.close()
 try:
     subprocess.call("curl https://reputation.alienvault.com/reputation.snort.gz",shell=True)
-    sonuc=subprocess.check_call("ls   /Users/username/Downloads/ | grep 'reputation.snort.gz'",shell=True)
+    sonuc=subprocess.check_call("ls   /Users/anilbaranyelken/Downloads/ | grep 'reputation.snort.gz'",shell=True)
     if int(sonuc)==0:
-        subprocess.call("tar -zxvf /Users/username/Downloads/reputation.snort.gz", shell=True)
-        komut="cat /Users/username/Downloads/reputation.snort | grep "+str(baglanti)
+        subprocess.call("tar -zxvf /Users/anilbaranyelken/Downloads/reputation.snort.gz", shell=True)
+        komut="cat /Users/anilbaranyelken/Downloads/reputation.snort | grep "+str(baglanti)
         sonuc=subprocess.check_output(komut,shell=True)
         print sonuc
         if sonuc:
