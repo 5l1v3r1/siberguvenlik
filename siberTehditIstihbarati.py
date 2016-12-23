@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-__author__ = "Anıl Baran Yelken"
 import requests
 import subprocess
 import socket
